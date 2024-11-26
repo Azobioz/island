@@ -13,7 +13,7 @@ public class Bear extends Animal {
             for (int i = 0; i < eatableAnimal.length; i++) {
                 if (food.getClass().equals(eatableAnimal[i].getClass())) {
                     hunger--;
-                    System.out.println("Bear " + id + ": nom-nom");
+                    System.out.println("Bear " + id + ": nom-nom " + food.getClass().getSimpleName() + " " );
                 }
 
             }

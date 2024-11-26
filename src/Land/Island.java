@@ -24,7 +24,7 @@ public class Island {
 
         Random random = new Random();
 //        int howManyAnimal = random.nextInt(2, 4);
-        int howManyAnimal = 2; //Пока что, только 2 животного, но потом вернуть как на одной строке выше
+        int howManyAnimal = 3; //Пока что, только 2 животного, но потом вернуть как на одной строке выше
 
         for (int i = 0; i < howManyAnimal; i++) { // Изначальное место животных на острове
             int whatAnimal = random.nextInt(2);

@@ -7,7 +7,7 @@ public abstract class Animal {
 
     public boolean isDead = false;
     public boolean isMoved = false;
-    public int hunger = 0;
+    public int hunger = 10;
     public static int counter;
     public int id;
 
