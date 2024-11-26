@@ -26,7 +26,7 @@ public class Island {
 //        int howManyAnimal = random.nextInt(2, 4);
         int howManyAnimal = 2; //Пока что, только 2 животного, но потом вернуть как на одной строке выше
 
-        for (int i = 0; i < howManyAnimal; i++) { // Изначальное место животных
+        for (int i = 0; i < howManyAnimal; i++) { // Изначальное место животных на острове
             int whatAnimal = random.nextInt(2);
             int whereItWillBeX = random.nextInt(width);
             int whereItWillBeY = random.nextInt(height);
@@ -45,7 +45,8 @@ public class Island {
         }
 
         // Цикл для каждого животного на острове
-        while (howManyAnimal != 1) {
+        while (howManyAnimal != 0) {
+
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     Location location = locations[i][j];
@@ -59,26 +60,43 @@ public class Island {
                                         Bear bear = (Bear) currentAnimal;
                                         bear.eat(otherAnimal);
                                         location.removeAnimal(otherAnimal);
-                                        howManyAnimal--; // Уменьшение счетчика животных
+                                        howManyAnimal--;
                                         break; // Прерывание цикла, так как медведь уже съел одного зайца
                                     }
 
 
                                 }
                             }
+                            else {
+                                for (int d = 0; d < animalsInLocation.size(); d++) {
+                                    if (animalsInLocation.get(d) != currentAnimal) {
+                                        currentAnimal.multiply(animalsInLocation.get(d), locations);
+                                    }
+                                }
+                            }
                         }
+
                     }
 
-                     // Для хождения
-                    List<Animal> animalsToMove = animalsInLocation;
-                    for (int f = 0; f < animalsToMove.size(); f++) {
-                        animalsToMove.get(f).walk(locations);
+                    // Для перемещения животных из одной локации в другую, если они там есть
+                    for (int f = 0; f < animalsInLocation.size(); f++) {
+                        animalsInLocation.get(f).walk(locations);
                         Thread.sleep(2000);
                     }
 
 
                 }
             }
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    Location location = locations[i][j];
+                    for (Animal animal : location.getAnimals()) {
+                        animal.isMoved = false;
+                    }
+                }
+            }
+
         }
 
 

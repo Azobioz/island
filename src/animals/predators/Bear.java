@@ -9,16 +9,15 @@ public class Bear extends Animal {
     @Override
     public <T> void eat(T food) {
         Animal[] eatableAnimal = canEatOnly();
-        if (hunger <= 10) {
+        if (hunger <= 10 && hunger > 0) {
             for (int i = 0; i < eatableAnimal.length; i++) {
                 if (food.getClass().equals(eatableAnimal[i].getClass())) {
-                    hunger++;
-                    System.out.println("Bear nom-nom");
+                    hunger--;
+                    System.out.println("Bear " + id + ": nom-nom");
                 }
 
             }
             Animal animalFood = (Animal) food;
-            animalFood.isDead = true;
         }
     }
 
@@ -30,10 +29,6 @@ public class Bear extends Animal {
 
 
 
-    @Override
-    public void multiply() {
-
-    }
 
 
 }

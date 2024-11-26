@@ -6,7 +6,10 @@ import Land.Location;
 public abstract class Animal {
 
     public boolean isDead = false;
+    public boolean isMoved = false;
     public int hunger = 0;
+    public static int counter;
+    public int id;
 
     public int x;
     public int y;
@@ -14,9 +17,11 @@ public abstract class Animal {
     public Animal(int x, int y) {
         this.x = x;
         this.y = y;
+        id = ++counter;
     }
 
     public Animal() {
+        id = ++counter;
     }
 
     public abstract <T> void eat(T food);
@@ -48,12 +53,17 @@ public abstract class Animal {
 
             island[x][y].removeAnimal(this);
             island[newX][newY].addAnimal(this);
-            System.out.println(this.getClass().getName() + " moved");
+            System.out.println(this.getClass().getSimpleName() + " " + id + " moved");
             this.x = newX;
             this.y = newY;
+            isMoved = true;
         }
     }
 
-    public abstract void multiply();
+    public <T> void multiply(T otherAnimal, Location[][] island) {
+        if (otherAnimal.getClass() == this.getClass()) {
+            island[x][y].addAnimal(this);
+        }
+    }
 
 }

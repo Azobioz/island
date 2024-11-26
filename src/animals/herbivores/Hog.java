@@ -13,8 +13,5 @@ public class Hog extends Animal {
         return new Animal[0];
     }
 
-    @Override
-    public void multiply() {
 
-    }
 }
