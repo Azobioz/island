@@ -4,6 +4,7 @@ import animals.Animal;
 import animals.herbivores.Rabbit;
 import animals.predators.Bear;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Island {
 
     Location[][] locations;
 
-    public Island(int width, int height) throws InterruptedException {
+    public Island(int width, int height) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
         this.locations = new Location[width][height]; //Добавление локаций
         for (int i = 0; i < width; i++) {
@@ -67,13 +68,13 @@ public class Island {
 
                                 }
                             }
-                            else {
-                                for (int d = 0; d < animalsInLocation.size(); d++) {
-                                    if (animalsInLocation.get(d) != currentAnimal) {
-                                        currentAnimal.multiply(animalsInLocation.get(d), locations);
-                                    }
+                            // Для размножения животных
+                            for (int d = 0; d < animalsInLocation.size(); d++) {
+                                if (animalsInLocation.get(d) != currentAnimal) {
+                                    currentAnimal.multiply(animalsInLocation.get(d), locations);
                                 }
                             }
+
                         }
 
                     }
@@ -87,7 +88,7 @@ public class Island {
 
                 }
             }
-
+            //Даем животным ходить
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     Location location = locations[i][j];
