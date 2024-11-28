@@ -72,6 +72,7 @@ public class Island {
                             for (int d = 0; d < animalsInLocation.size(); d++) {
                                 if (animalsInLocation.get(d) != currentAnimal) {
                                     currentAnimal.multiply(animalsInLocation.get(d), locations);
+                                    break; // пока-что только в локации может произойти только одно размножение
                                 }
                             }
 
