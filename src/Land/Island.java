@@ -33,14 +33,14 @@ public class Island {
             int whereItWillBeY = random.nextInt(height);
             if (whatAnimal == 1) { //
                 Bear bear = new Bear();
-                bear.x = whereItWillBeX;
-                bear.y = whereItWillBeY;
+                bear.setX(whereItWillBeX);
+                bear.setY(whereItWillBeY);
                 locations[whereItWillBeX][whereItWillBeY].addAnimal(bear);
             }
             else {
                 Rabbit rabbit = new Rabbit();
-                rabbit.x = whereItWillBeX;
-                rabbit.y = whereItWillBeY;
+                rabbit.setX(whereItWillBeX);
+                rabbit.setY(whereItWillBeY);
                 locations[whereItWillBeX][whereItWillBeY].addAnimal(rabbit);
             }
         }
@@ -94,7 +94,7 @@ public class Island {
                 for (int j = 0; j < height; j++) {
                     Location location = locations[i][j];
                     for (Animal animal : location.getAnimals()) {
-                        animal.isMoved = false;
+                        animal.setMoved(false);
                     }
                 }
             }
@@ -107,5 +107,8 @@ public class Island {
     public Location[][] getLocations() {
         return locations;
     }
+
+
+
 
 }

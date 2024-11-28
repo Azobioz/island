@@ -6,14 +6,12 @@ import Land.Location;
 
 public abstract class Animal {
 
-    public boolean isDead = false;
-    public boolean isMoved = false;
-    public int hunger = 0;
-    public static int counter;
-    public int id;
-
-    public int x;
-    public int y;
+    private boolean isMoved = false;
+    private int hunger = 0;
+    private static int counter;
+    private int id;
+    private int x;
+    private int y;
 
     public Animal(int x, int y) {
         this.x = x;
@@ -70,4 +68,51 @@ public abstract class Animal {
         }
     }
 
+    public boolean isMoved() {
+        return isMoved;
+    }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public static int getCounter() {
+        return counter;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setMoved(boolean moved) {
+        isMoved = moved;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
+    }
+
+    public static void setCounter(int counter) {
+        Animal.counter = counter;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

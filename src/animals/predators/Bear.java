@@ -9,11 +9,11 @@ public class Bear extends Animal {
     @Override
     public <T> void eat(T food) {
         Animal[] eatableAnimal = canEatOnly();
-        if (hunger <= 10 && hunger > 0) {
+        if (getHunger() <= 10 && getHunger() > 0) {
             for (int i = 0; i < eatableAnimal.length; i++) {
                 if (food.getClass().equals(eatableAnimal[i].getClass())) {
-                    hunger--;
-                    System.out.println("Bear " + id + ": nom-nom " + food.getClass().getSimpleName() + " " );
+                    setHunger(getHunger() - 1);
+                    System.out.println("Bear " + getId() + ": nom-nom " + food.getClass().getSimpleName() + " " );
                 }
 
             }
