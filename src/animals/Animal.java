@@ -10,6 +10,7 @@ public abstract class Animal {
 
     private boolean isMoved = false;
     private int hunger = 0;
+    private int rechargeToMultiplyAgain = 10;
     private static int counter;
     private int id;
     private int x;
@@ -79,16 +80,20 @@ public abstract class Animal {
             }
             isMoved = true;
             hunger++;
+            rechargeToMultiplyAgain++;
         }
     }
 
 
     public <T> boolean multiply(T otherAnimal, Location[][] island) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        if (otherAnimal.getClass() == this.getClass()) {
+        if (otherAnimal.getClass() == this.getClass() && rechargeToMultiplyAgain >= 10) {
             Animal newAnimal = this.getClass().getDeclaredConstructor().newInstance();
             newAnimal.setMoved(true);
             island[x][y].addAnimal(newAnimal);
             Island.setHowManyAnimals(Island.getHowManyAnimals() + 1);
+            this.rechargeToMultiplyAgain = 0;
+            ((Animal) otherAnimal).rechargeToMultiplyAgain = 0;
+            newAnimal.rechargeToMultiplyAgain = 0;
             System.out.println(this.getClass().getSimpleName() + " " + this.id
                     + " + " + otherAnimal.getClass().getSimpleName() + " " + ((Animal) otherAnimal).getId() + " = "
                     + newAnimal.getClass().getSimpleName() + " " + newAnimal.getId());
@@ -151,5 +156,13 @@ public abstract class Animal {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int isRechargeToMultiplyAgain() {
+        return rechargeToMultiplyAgain;
+    }
+
+    public void setRechargeToMultiplyAgain(int rechargeToMultiplyAgain) {
+        this.rechargeToMultiplyAgain = rechargeToMultiplyAgain;
     }
 }

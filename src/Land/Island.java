@@ -25,21 +25,17 @@ public class Island {
         Random random = new Random();
         setHowManyAnimals(howManyAnimals);
 
-        for (int i = 0; i < getHowManyAnimals(); i++) { // Изначальное место животных на острове
+        for (int i = 0; i < getHowManyAnimals(); i++) { // Создание и добавление животных на остров
             int whatAnimal = random.nextInt(2);
             int whereItWillBeX = random.nextInt(width);
             int whereItWillBeY = random.nextInt(height);
-            if (whatAnimal == 1) { //
-                Bear bear = new Bear();
-                bear.setX(whereItWillBeX);
-                bear.setY(whereItWillBeY);
-                locations[whereItWillBeX][whereItWillBeY].addAnimal(bear);
+            if (whatAnimal == 1) {
+                Bear bear = new Bear(whereItWillBeX, whereItWillBeY);
+                locations[bear.getX()][bear.getY()].addAnimal(bear);
             }
             else {
-                Rabbit rabbit = new Rabbit();
-                rabbit.setX(whereItWillBeX);
-                rabbit.setY(whereItWillBeY);
-                locations[whereItWillBeX][whereItWillBeY].addAnimal(rabbit);
+                Rabbit rabbit = new Rabbit(whereItWillBeX, whereItWillBeY);
+                locations[rabbit.getX()][rabbit.getY()].addAnimal(rabbit);
             }
         }
 
@@ -67,12 +63,9 @@ public class Island {
                                 for (Animal otherAnimal : animalsInLocation) {
                                     if (otherAnimal instanceof Rabbit) {
                                         currentAnimal.eat(otherAnimal);
-                                        setHowManyAnimals(getHowManyAnimals() - 1);
-                                        Thread.sleep(2000);
+//                                        Thread.sleep(2000);
                                         break; // Прерывание цикла, так как медведь уже съел одного зайца
                                     }
-
-
                                 }
                             }
                         }
@@ -91,7 +84,7 @@ public class Island {
                                     }
                                 }
                             }
-                            Thread.sleep(2000);
+//                            Thread.sleep(2000);
                         }
 
                     }
@@ -99,7 +92,7 @@ public class Island {
                     // Для перемещения животных из одной локации в другую, если они там есть
                     for (int f = 0; f < animalsInLocation.size(); f++) {
                         animalsInLocation.get(f).walk(locations);
-                        Thread.sleep(2000);
+//                        Thread.sleep(2000);
                     }
 
 
@@ -116,6 +109,7 @@ public class Island {
             }
 
         }
+        System.out.println("All animal are dead");
 
 
     }
