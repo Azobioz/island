@@ -5,18 +5,17 @@ import animals.herbivores.Rabbit;
 import animals.predators.Bear;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public class Island {
 
-    Location[][] locations;
+    private static Location[][] locations;
+    private static int howManyAnimals;
 
-    public Island(int width, int height) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Island(int width, int height, int howManyAnimals) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
-        this.locations = new Location[width][height]; //Добавление локаций
+        locations = new Location[width][height]; //Добавление локаций
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 locations[i][j] = new Location();
@@ -24,10 +23,9 @@ public class Island {
         }
 
         Random random = new Random();
-//        int howManyAnimal = random.nextInt(2, 4);
-        int howManyAnimal = 3; //Пока что, только 2 животного, но потом вернуть как на одной строке выше
+        setHowManyAnimals(howManyAnimals);
 
-        for (int i = 0; i < howManyAnimal; i++) { // Изначальное место животных на острове
+        for (int i = 0; i < getHowManyAnimals(); i++) { // Изначальное место животных на острове
             int whatAnimal = random.nextInt(2);
             int whereItWillBeX = random.nextInt(width);
             int whereItWillBeY = random.nextInt(height);
@@ -46,7 +44,17 @@ public class Island {
         }
 
         // Цикл для каждого животного на острове
-        while (howManyAnimal != 0) {
+        while (getHowManyAnimals() != 0) {
+
+            // Проверка голода
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                   List<Animal> animalsInLocation = Island.getLocations()[i][j].getAnimals();
+                   for (int k = 0; k < animalsInLocation.size(); k++) {
+                       animalsInLocation.get(k).checkHunger();
+                   }
+                }
+            }
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
@@ -58,24 +66,32 @@ public class Island {
                             if (currentAnimal instanceof Bear) {
                                 for (Animal otherAnimal : animalsInLocation) {
                                     if (otherAnimal instanceof Rabbit) {
-                                        Bear bear = (Bear) currentAnimal;
-                                        bear.eat(otherAnimal);
-                                        location.removeAnimal(otherAnimal);
-                                        howManyAnimal--;
+                                        currentAnimal.eat(otherAnimal);
+                                        setHowManyAnimals(getHowManyAnimals() - 1);
+                                        Thread.sleep(2000);
                                         break; // Прерывание цикла, так как медведь уже съел одного зайца
                                     }
 
 
                                 }
                             }
+                        }
+                        if (animalsInLocation.size() > 1) {
                             // Для размножения животных
-                            for (int d = 0; d < animalsInLocation.size(); d++) {
-                                if (animalsInLocation.get(d) != currentAnimal) {
-                                    currentAnimal.multiply(animalsInLocation.get(d), locations);
-                                    break; // пока-что только в локации может произойти только одно размножение
+                            boolean needToBreak = false;
+                            for (int k = 0; k < animalsInLocation.size(); k++) {
+                                if (needToBreak) {
+                                    break;
+                                }
+                                Animal currentAnimal = animalsInLocation.get(k);
+                                for (int d = 0; d < animalsInLocation.size(); d++) {
+                                    if (animalsInLocation.get(d) != currentAnimal && currentAnimal.multiply(animalsInLocation.get(d), locations)) {
+                                        needToBreak = true;
+                                        break; //только одно размножение в одной локации за каждый ход
+                                    }
                                 }
                             }
-
+                            Thread.sleep(2000);
                         }
 
                     }
@@ -104,11 +120,17 @@ public class Island {
 
     }
 
-    public Location[][] getLocations() {
+    public static Location[][] getLocations() {
         return locations;
     }
 
+    public static int getHowManyAnimals() {
+        return howManyAnimals;
+    }
 
+    public static void setHowManyAnimals(int howManyAnimals) {
+        Island.howManyAnimals = howManyAnimals;
+    }
 
 
 }

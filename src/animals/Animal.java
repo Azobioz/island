@@ -2,6 +2,8 @@ package animals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
+
+import Land.Island;
 import Land.Location;
 
 public abstract class Animal {
@@ -28,43 +30,78 @@ public abstract class Animal {
     public abstract Animal[] canEatOnly();
 
     public void walk(Location[][] island) {
+        if (!isMoved()) {
+            Random random = new Random();
+            int newMove = random.nextInt(4); // 0 - up, 1 - right, 2 - down, 3 - left
 
-        Random random = new Random();
-        int newMove = random.nextInt(4); // 0 - up, 1 - right, 2 - down, 3 - left
+            int newX = x;
+            int newY = y;
 
-        int newX = x;
-        int newY = y;
+            switch (newMove) {
+                case 0: // up
+                    newY = Math.max(0, y - 1);
+                    break;
 
-        switch (newMove) {
-            case 0: // up
-                newY = Math.max(0, y - 1);
-                break;
+                case 1: // right
+                    newX = Math.min(island[0].length - 1, x + 1);
+                    break;
+                case 2: // down
+                    newY = Math.min(island.length - 1, y + 1);
+                    break;
+                case 3: // left
+                    newX = Math.max(0, x - 1);
+                    break;
+            }
 
-            case 1: // right
-                newX = Math.min(island[0].length - 1, x + 1);
-                break;
-            case 2: // down
-                newY = Math.min(island.length - 1, y + 1);
-                break;
-            case 3: // left
-                newX = Math.max(0, x - 1);
-                break;
+            if (newX == x && newY == y) {
+                switch (newMove) {
+                    case 0:
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to up because he's in [" + newX + ", " + newY + "]");
+                        break;
+                    case 1:
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to right because he's in [" + newX + ", " + newY + "]");
+                        break;
+                    case 2:
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to down because he's in [" + newX + ", " + newY + "]");
+                        break;
+                    case 3:
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to left because he's in [" + newX + ", " + newY + "]");
+                        break;
+
+                }
+            }
+            else {
+                island[x][y].removeAnimal(this);
+                island[newX][newY].addAnimal(this);
+                System.out.println(this.getClass().getSimpleName() + " " + id + " moved to [" + newX + ", " + newY + "]");
+                this.x = newX;
+                this.y = newY;
+            }
+            isMoved = true;
+            hunger++;
         }
-
-        island[x][y].removeAnimal(this);
-        island[newX][newY].addAnimal(this);
-        System.out.println(this.getClass().getSimpleName() + " " + id + " moved");
-        this.x = newX;
-        this.y = newY;
-        isMoved = true;
-        hunger++;
     }
 
 
-    public <T> void multiply(T otherAnimal, Location[][] island) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public <T> boolean multiply(T otherAnimal, Location[][] island) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         if (otherAnimal.getClass() == this.getClass()) {
             Animal newAnimal = this.getClass().getDeclaredConstructor().newInstance();
+            newAnimal.setMoved(true);
             island[x][y].addAnimal(newAnimal);
+            Island.setHowManyAnimals(Island.getHowManyAnimals() + 1);
+            System.out.println(this.getClass().getSimpleName() + " " + this.id
+                    + " + " + otherAnimal.getClass().getSimpleName() + " " + ((Animal) otherAnimal).getId() + " = "
+                    + newAnimal.getClass().getSimpleName() + " " + newAnimal.getId());
+            return true;
+        }
+        return false;
+    }
+
+    public void checkHunger() {
+        if (hunger >= 5) {
+            Island.getLocations()[this.getX()][this.getY()].removeAnimal(this);
+            Island.setHowManyAnimals(Island.getHowManyAnimals() - 1);
+            System.out.println(Animal.this.getClass().getSimpleName() + " " + this.id + " is starved to death");
         }
     }
 

@@ -1,5 +1,6 @@
 package animals.predators;
 
+import Land.Island;
 import animals.Animal;
 import animals.herbivores.*;
 
@@ -8,16 +9,18 @@ public class Bear extends Animal {
 
     @Override
     public <T> void eat(T food) {
-        Animal[] eatableAnimal = canEatOnly();
-        if (getHunger() <= 10 && getHunger() > 0) {
-            for (int i = 0; i < eatableAnimal.length; i++) {
-                if (food.getClass().equals(eatableAnimal[i].getClass())) {
+        Animal[] eatableAnimals = canEatOnly();
+        if (getHunger() <= 10 && getHunger() >= 0) {
+            for (Animal eatableAnimal : eatableAnimals) {
+                if (food.getClass().equals(eatableAnimal.getClass())) {
+                    Island.getLocations()[getX()][getY()].removeAnimal(eatableAnimal);
                     setHunger(getHunger() - 1);
-                    System.out.println("Bear " + getId() + ": nom-nom " + food.getClass().getSimpleName() + " " );
+                    System.out.println("Bear " + getId() + " ate "
+                            + food.getClass().getSimpleName() + " " + ((Animal) food).getId()
+                            + " in [" + ((Animal) food).getX() + ", " + ((Animal) food).getY() + "]");
                 }
 
             }
-            Animal animalFood = (Animal) food;
         }
     }
 
