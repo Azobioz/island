@@ -16,19 +16,19 @@ public class Plant {
 
         switch (change) {
             case 0:
-                changeToSpawn = 20;
+                changeToSpawn = 10;
                 break;
             case 1:
-                changeToSpawn = 30;
+                changeToSpawn = 15;
                 break;
             case 2:
-                changeToSpawn = 35;
+                changeToSpawn = 20;
                 break;
             case 3:
-                changeToSpawn = 40;
+                changeToSpawn = 30;
                 break;
             case 4:
-                changeToSpawn = 50;
+                changeToSpawn = 35;
                 break;
         }
 

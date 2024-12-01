@@ -1,12 +1,12 @@
 package animals;
 
-import java.lang.reflect.Constructor;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 import Land.Island;
 import Land.Location;
-import Land.Plant;
+
 
 public abstract class Animal {
 
@@ -57,16 +57,16 @@ public abstract class Animal {
             if (newX == x && newY == y) {
                 switch (newMove) {
                     case 0:
-                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to up because he's in [" + newX + ", " + newY + "]");
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to up because he's in [" + newY + ", " + newX + "]");
                         break;
                     case 1:
-                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to right because he's in [" + newX + ", " + newY + "]");
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to right because he's in [" + newY + ", " + newX + "]");
                         break;
                     case 2:
-                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to down because he's in [" + newX + ", " + newY + "]");
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to down because he's in [" + newY + ", " + newX + "]");
                         break;
                     case 3:
-                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to left because he's in [" + newX + ", " + newY + "]");
+                        System.out.println(this.getClass().getSimpleName() + " " + id + " can't move to left because he's in [" + newY + ", " + newX + "]");
                         break;
 
                 }
@@ -74,7 +74,7 @@ public abstract class Animal {
             else {
                 island[y][x].removeAnimal(this);
                 island[newY][newX].addAnimal(this);
-                System.out.println(this.getClass().getSimpleName() + " " + id + " moved to [" + newX + ", " + newY + "]");
+                System.out.println(this.getClass().getSimpleName() + " " + id + " moved to [" + newY + ", " + newX + "]");
                 this.x = newX;
                 this.y = newY;
             }

@@ -22,7 +22,7 @@ public class Herbivore extends Animal {
                 this.setHunger(0);
                 this.setMoved(true);
                 System.out.println(this.getClass().getSimpleName() + " " + this.getId() + " ate "
-                        + food.getClass().getSimpleName() + " in [" + this.getX() + ", " + this.getY() + "]");
+                        + food.getClass().getSimpleName() + " in [" + this.getY() + ", " + this.getX() + "]");
                 return true;
             }
 
@@ -32,7 +32,7 @@ public class Herbivore extends Animal {
 
     @Override
     public Plant[] canEatOnly() {
-        return new Plant[] {new Plant()};
+        return new Plant[]{ new Plant()};
     }
 
 }

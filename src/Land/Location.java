@@ -20,7 +20,7 @@ public class Location {
             Plant plant = new Plant();
             if (chance < plant.getChangeToSpawn()) {
                 Island.getLocations()[randomY][randomX].addPlant(plant);
-                System.out.println("A new plant in [" + randomX + ", " + randomY + "]");
+                System.out.println("A new plant in [" + randomY + ", " + randomX + "]");
             }
             howManyPlants--;
         }
