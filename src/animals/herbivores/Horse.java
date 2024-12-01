@@ -1,16 +1,17 @@
 package animals.herbivores;
 
+import Land.Plant;
 import animals.Animal;
 
-public class Horse extends Animal {
+public class Horse extends Herbivore {
     @Override
     public void eat(Object food) {
 
     }
 
     @Override
-    public Animal[] canEatOnly() {
-        return new Animal[0];
+    public Plant[] canEatOnly() {
+        return new Plant[0];
     }
 
 

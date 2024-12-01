@@ -2,11 +2,8 @@ package animals.predators;
 
 import animals.Animal;
 
-public class Python extends Animal {
-    @Override
-    public void eat(Object food) {
+public class Python extends Predator {
 
-    }
 
     @Override
     public Animal[] canEatOnly() {

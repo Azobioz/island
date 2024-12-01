@@ -47,15 +47,15 @@ public class Island {
                 for (int j = 0; j < height; j++) {
                     Location location = locations[i][j];
                     List<Animal> animalsInLocation = location.getAnimals();
-                    if (animalsInLocation.size() > 1 || ) { //Может ли животное съесть другого
+                    List<Plant> plantsInLocation = location.getPlants();
+                    if (animalsInLocation.size() > 1 || !plantsInLocation.isEmpty()) { //Может ли животное съесть другого
                         for (int k = 0; k < animalsInLocation.size(); k++) {
                             Animal currentAnimal = animalsInLocation.get(k);
-                            if (currentAnimal instanceof Bear) {
+                            if (animalsInLocation.get(k) != currentAnimal) {
                                 for (Animal otherAnimal : animalsInLocation) {
-                                    if (otherAnimal instanceof Rabbit) {
                                         currentAnimal.eat(otherAnimal);
 //                                        Thread.sleep(2000);
-                                        break; // Прерывание цикла, так как медведь уже съел одного зайца
+                                        break; // Прерывание цикла, так как хищник съел добычу
                                     }
                                 }
                             }

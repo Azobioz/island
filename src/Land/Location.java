@@ -52,6 +52,10 @@ public class Location {
     public void removePlant(Plant plant) {
         plants.remove(plant);
     }
+
+    public List<Plant> getPlants() {
+        return plants;
+    }
 }
 
 

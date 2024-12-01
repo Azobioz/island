@@ -2,11 +2,8 @@ package animals.predators;
 
 import animals.Animal;
 
-public class Eagle extends Animal {
-    @Override
-    public void eat(Object food) {
+public class Eagle extends Predator {
 
-    }
 
     @Override
     public Animal[] canEatOnly() {

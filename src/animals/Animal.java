@@ -6,6 +6,7 @@ import java.util.Random;
 
 import Land.Island;
 import Land.Location;
+import Land.Plant;
 
 public abstract class Animal {
 
@@ -26,8 +27,6 @@ public abstract class Animal {
     public Animal() {
 
     }
-
-    public abstract <T> void eat(T food);
 
     public abstract <T> T[] canEatOnly();
 

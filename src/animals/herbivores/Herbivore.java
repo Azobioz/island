@@ -4,7 +4,7 @@ import Land.Island;
 import Land.Plant;
 import animals.Animal;
 
-public class Herbivore extends Animal<Plant> {
+public class Herbivore extends Animal {
 
     public Herbivore(int x, int y) {
         super(x, y);
@@ -13,6 +13,7 @@ public class Herbivore extends Animal<Plant> {
     public Herbivore() {
         super();
     }
+
 
     public void eat(Plant food) {
         if (getHunger() <= 5 && getHunger() >= 0) {
