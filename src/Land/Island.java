@@ -2,13 +2,13 @@ package Land;
 
 import animals.Animal;
 import animals.herbivores.*;
-import animals.predators.Bear;
-import animals.predators.Predator;
+import animals.predators.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Random;
 
+import static javax.management.Query.between;
 import static javax.management.Query.or;
 
 public class Island {
@@ -16,11 +16,11 @@ public class Island {
     private static Location[][] locations;
     private static int howManyAnimals;
 
-    public Island(int width, int height, int howManyAnimals, int howManyPlants) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Island(int height, int width, int howManyAnimals, int howManyPlants) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
-        locations = new Location[width][height]; //Добавление локаций и растений
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        locations = new Location[height][width]; //Добавление локаций и растений
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 locations[i][j] = new Location();
             }
         }
@@ -30,52 +30,72 @@ public class Island {
         setHowManyAnimals(howManyAnimals);
 
         for (int i = 0; i < getHowManyAnimals(); i++) { // Создание и добавление животных на остров
-            int whatAnimal = random.nextInt(12);
+            int whatAnimal = random.nextInt(16);
             int whereItWillBeX = random.nextInt(width);
             int whereItWillBeY = random.nextInt(height);
             if (whatAnimal == 0) {
                 Buffalo buffalo = new Buffalo(whereItWillBeX, whereItWillBeY);
-                locations[buffalo.getX()][buffalo.getY()].addAnimal(buffalo);
+                locations[buffalo.getY()][buffalo.getX()].addAnimal(buffalo);
             }
             else if (whatAnimal == 1) {
                 Caterpillar caterpillar = new Caterpillar(whereItWillBeX, whereItWillBeY);
-                locations[caterpillar.getX()][caterpillar.getY()].addAnimal(caterpillar);
+                locations[caterpillar.getY()][caterpillar.getX()].addAnimal(caterpillar);
             }
             else if (whatAnimal == 2) {
                 Deer deer = new Deer(whereItWillBeX, whereItWillBeY);
-                locations[deer.getX()][deer.getY()].addAnimal(deer);
+                locations[deer.getY()][deer.getX()].addAnimal(deer);
             }
             else if (whatAnimal == 3) {
                 Duck duck = new Duck(whereItWillBeX, whereItWillBeY);
-                locations[duck.getX()][duck.getY()].addAnimal(duck);
+                locations[duck.getY()][duck.getX()].addAnimal(duck);
             }
             else if (whatAnimal == 4) {
                 Goat goat = new Goat(whereItWillBeX, whereItWillBeY);
-                locations[goat.getX()][goat.getY()].addAnimal(goat);
+                locations[goat.getY()][goat.getX()].addAnimal(goat);
             }
             else if (whatAnimal == 5) {
                 Hog hog = new Hog(whereItWillBeX, whereItWillBeY);
-                locations[hog.getX()][hog.getY()].addAnimal(hog);
+                locations[hog.getY()][hog.getX()].addAnimal(hog);
             }
             else if (whatAnimal == 6) {
                 Horse horse = new Horse(whereItWillBeX, whereItWillBeY);
-                locations[horse.getX()][horse.getY()].addAnimal(horse);
+                locations[horse.getY()][horse.getX()].addAnimal(horse);
             }
             else if (whatAnimal == 7) {
                 Mouse mouse = new Mouse(whereItWillBeX, whereItWillBeY);
-                locations[mouse.getX()][mouse.getY()].addAnimal(mouse);
+                locations[mouse.getY()][mouse.getX()].addAnimal(mouse);
             }
             else if (whatAnimal == 8) {
                 Mouse mouse = new Mouse(whereItWillBeX, whereItWillBeY);
-                locations[mouse.getX()][mouse.getY()].addAnimal(mouse);
+                locations[mouse.getY()][mouse.getX()].addAnimal(mouse);
             }
             else if (whatAnimal == 9) {
                 Rabbit rabbit = new Rabbit(whereItWillBeX, whereItWillBeY);
-                locations[rabbit.getX()][rabbit.getY()].addAnimal(rabbit);
+                locations[rabbit.getY()][rabbit.getX()].addAnimal(rabbit);
             }
             else if (whatAnimal == 10) {
                 Sheep sheep = new Sheep(whereItWillBeX, whereItWillBeY);
-                locations[sheep.getX()][sheep.getY()].addAnimal(sheep);
+                locations[sheep.getY()][sheep.getX()].addAnimal(sheep);
+            }
+            else if (whatAnimal == 11) {
+                Bear bear = new Bear(whereItWillBeX, whereItWillBeY);
+                locations[bear.getY()][bear.getX()].addAnimal(bear);
+            }
+            else if (whatAnimal == 12) {
+                Eagle eagle = new Eagle(whereItWillBeX, whereItWillBeY);
+                locations[eagle.getY()][eagle.getX()].addAnimal(eagle);
+            }
+            else if (whatAnimal == 13) {
+                Fox fox = new Fox(whereItWillBeX, whereItWillBeY);
+                locations[fox.getY()][fox.getX()].addAnimal(fox);
+            }
+            else if (whatAnimal == 14) {
+                Python python = new Python(whereItWillBeX, whereItWillBeY);
+                locations[python.getY()][python.getX()].addAnimal(python);
+            }
+            else {
+                Wolf wolf = new Wolf(whereItWillBeX, whereItWillBeY);
+                locations[wolf.getY()][wolf.getX()].addAnimal(wolf);
             }
 
         }
@@ -83,8 +103,8 @@ public class Island {
         // Цикл для каждого животного на острове
         while (getHowManyAnimals() != 0) {
 
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
                     Location location = locations[i][j];
                     List<Animal> animalsInLocation = location.getAnimals();
                     List<Plant> plantsInLocation = location.getPlants();
@@ -92,7 +112,7 @@ public class Island {
                         for (int k = 0; k < animalsInLocation.size(); k++) {
                             if (animalsInLocation.get(k) instanceof Predator currentPredator) {
                                 for (Animal otherAnimal : animalsInLocation) {
-                                    if (currentPredator == otherAnimal ) {
+                                    if (currentPredator != otherAnimal ) {
                                         if (currentPredator.eat(otherAnimal)) {
                                             break; //Прерывание т. к. хищник съел животное
                                         }
@@ -144,8 +164,8 @@ public class Island {
                 }
             }
             //Даем животным ходить
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
                     Location location = locations[i][j];
                     for (Animal animal : location.getAnimals()) {
                         animal.setMoved(false);
@@ -154,8 +174,8 @@ public class Island {
             }
 
             // Проверка голода
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
                     List<Animal> animalsInLocation = Island.getLocations()[i][j].getAnimals();
                     for (int k = 0; k < animalsInLocation.size(); k++) {
                         animalsInLocation.get(k).checkHunger();

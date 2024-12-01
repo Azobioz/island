@@ -13,20 +13,16 @@ public class Location {
 
     public static void spawnPlant(int howManyPlants) {
         Random random = new Random();
-        int randomX = random.nextInt(Island.getLocations().length);
-        int randomY = random.nextInt(Island.getLocations()[1].length);
-        for (int i = randomX; howManyPlants != 0; i = randomX) {
-            for (int j = randomY; howManyPlants != 0; i = randomY) {
-                int chance = random.nextInt(100);
-                Plant plant = new Plant();
-                if (chance < plant.getChangeToSpawn()) {
-                    Island.getLocations()[i][j].addPlant(plant);
-                    System.out.println("A new plant in [" + i + ", " + j + "]");
-                }
-                randomX = random.nextInt(Island.getLocations().length);
-                randomY = random.nextInt(Island.getLocations()[1].length);
-                howManyPlants--;
+        while (howManyPlants != 0) {
+            int randomX = random.nextInt(Island.getLocations()[0].length);
+            int randomY = random.nextInt(Island.getLocations().length);
+            int chance = random.nextInt(100);
+            Plant plant = new Plant();
+            if (chance < plant.getChangeToSpawn()) {
+                Island.getLocations()[randomY][randomX].addPlant(plant);
+                System.out.println("A new plant in [" + randomX + ", " + randomY + "]");
             }
+            howManyPlants--;
         }
 
     }

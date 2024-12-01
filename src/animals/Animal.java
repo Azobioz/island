@@ -72,8 +72,8 @@ public abstract class Animal {
                 }
             }
             else {
-                island[x][y].removeAnimal(this);
-                island[newX][newY].addAnimal(this);
+                island[y][x].removeAnimal(this);
+                island[newY][newX].addAnimal(this);
                 System.out.println(this.getClass().getSimpleName() + " " + id + " moved to [" + newX + ", " + newY + "]");
                 this.x = newX;
                 this.y = newY;
@@ -93,7 +93,7 @@ public abstract class Animal {
             newAnimal.setMoved(true);
             newAnimal.setX(x);
             newAnimal.setY(y);
-            island[x][y].addAnimal(newAnimal);
+            island[y][x].addAnimal(newAnimal);
             Island.setHowManyAnimals(Island.getHowManyAnimals() + 1);
             this.rechargeToMultiplyAgain = 0;
             ((Animal) otherAnimal).rechargeToMultiplyAgain = 0;
@@ -108,7 +108,7 @@ public abstract class Animal {
 
     public void checkHunger() {
         if (hunger >= 5) {
-            Island.getLocations()[this.getX()][this.getY()].removeAnimal(this);
+            Island.getLocations()[this.getY()][this.getX()].removeAnimal(this);
             Island.setHowManyAnimals(Island.getHowManyAnimals() - 1);
             System.out.println(Animal.this.getClass().getSimpleName() + " " + this.id + " is starved to death");
         }

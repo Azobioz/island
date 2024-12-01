@@ -21,8 +21,9 @@ public class Predator extends Animal {
         if (getHunger() <= 5 && getHunger() >= 0) {
             for (Object eatableAnimal : eatableAnimals) {
                 if (food.getClass().equals(eatableAnimal.getClass())) {
-                    Island.getLocations()[getX()][getY()].removeAnimal(food);
+                    Island.getLocations()[getY()][getX()].removeAnimal(food);
                     setHunger(0);
+                    setMoved(true);
                     Island.setHowManyAnimals(Island.getHowManyAnimals() - 1);
                     System.out.println(this.getClass().getSimpleName() + " " + getId() + " ate "
                             + food.getClass().getSimpleName() + " " + food.getId()
