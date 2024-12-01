@@ -4,14 +4,14 @@ import Land.Plant;
 import animals.Animal;
 
 public class Hog extends Herbivore {
-    @Override
-    public  void eat(Object food) {
 
+
+    public Hog(int x, int y) {
+        super(x, y);
     }
 
-    @Override
-    public Plant[] canEatOnly() {
-        return new Plant[0];
+    public Hog() {
+        super();
     }
 
 

@@ -16,7 +16,7 @@ public class Predator extends Animal {
 
 
 
-    public  void eat(Animal food) {
+    public boolean eat(Animal food) {
         Object[] eatableAnimals = canEatOnly();
         if (getHunger() <= 5 && getHunger() >= 0) {
             for (Object eatableAnimal : eatableAnimals) {
@@ -27,11 +27,12 @@ public class Predator extends Animal {
                     System.out.println(this.getClass().getSimpleName() + " " + getId() + " ate "
                             + food.getClass().getSimpleName() + " " + food.getId()
                             + " in [" + food.getX() + ", " + food.getY() + "]");
-                    break;
+                    return true;
                 }
 
             }
         }
+        return false;
     }
 
     @Override

@@ -6,15 +6,12 @@ import animals.Animal;
 public class Deer extends Herbivore {
 
 
-
-    @Override
-    public void eat(Object food) {
-
+    public Deer(int x, int y) {
+        super(x, y);
     }
 
-    @Override
-    public Plant[] canEatOnly() {
-        return new Plant[0];
+    public Deer() {
+        super();
     }
 
 

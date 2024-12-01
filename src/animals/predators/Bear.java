@@ -16,7 +16,7 @@ public class Bear extends Predator {
 
 
 
-    public <T extends Animal> Animal[] canEatOnly() {
+    public Animal[] canEatOnly() {
         return new Animal[]{new Python(), new Horse(), new Deer(), new Rabbit(),
                 new Mouse(), new Goat(), new Sheep(), new Hog(), new Buffalo(), new Duck()};
     }
