@@ -4,7 +4,7 @@ import animals.Animal;
 
 public class Mouse extends Animal {
     @Override
-    public <T> void eat(T food) {
+    public void eat(Object food) {
 
     }
 

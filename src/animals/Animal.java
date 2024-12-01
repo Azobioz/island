@@ -1,5 +1,6 @@
 package animals;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
@@ -23,12 +24,12 @@ public abstract class Animal {
     }
 
     public Animal() {
-        id = ++counter;
+
     }
 
     public abstract <T> void eat(T food);
 
-    public abstract Animal[] canEatOnly();
+    public abstract <T> T[] canEatOnly();
 
     public void walk(Location[][] island) {
         if (!isMoved()) {
@@ -85,10 +86,14 @@ public abstract class Animal {
     }
 
 
-    public <T> boolean multiply(T otherAnimal, Location[][] island) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public boolean multiply(Object otherAnimal, Location[][] island) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         if (otherAnimal.getClass() == this.getClass() && rechargeToMultiplyAgain >= 10) {
             Animal newAnimal = this.getClass().getDeclaredConstructor().newInstance();
+            setCounter(getCounter() + 1);
+            newAnimal.setId(counter);
             newAnimal.setMoved(true);
+            newAnimal.setX(x);
+            newAnimal.setY(y);
             island[x][y].addAnimal(newAnimal);
             Island.setHowManyAnimals(Island.getHowManyAnimals() + 1);
             this.rechargeToMultiplyAgain = 0;

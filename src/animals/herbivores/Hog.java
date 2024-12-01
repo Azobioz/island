@@ -4,7 +4,7 @@ import animals.Animal;
 
 public class Hog extends Animal {
     @Override
-    public <T> void eat(T food) {
+    public  void eat(Object food) {
 
     }
 

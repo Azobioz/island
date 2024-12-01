@@ -7,7 +7,7 @@ public class Deer extends Animal {
 
 
     @Override
-    public <T> void eat(T food) {
+    public void eat(Object food) {
 
     }
 

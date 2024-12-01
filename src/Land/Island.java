@@ -13,14 +13,15 @@ public class Island {
     private static Location[][] locations;
     private static int howManyAnimals;
 
-    public Island(int width, int height, int howManyAnimals) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Island(int width, int height, int howManyAnimals, int howManyPlants) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
-        locations = new Location[width][height]; //Добавление локаций
+        locations = new Location[width][height]; //Добавление локаций и растений
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 locations[i][j] = new Location();
             }
         }
+        Location.spawnPlant(howManyPlants); //Добавление растений
 
         Random random = new Random();
         setHowManyAnimals(howManyAnimals);
@@ -42,21 +43,11 @@ public class Island {
         // Цикл для каждого животного на острове
         while (getHowManyAnimals() != 0) {
 
-            // Проверка голода
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                   List<Animal> animalsInLocation = Island.getLocations()[i][j].getAnimals();
-                   for (int k = 0; k < animalsInLocation.size(); k++) {
-                       animalsInLocation.get(k).checkHunger();
-                   }
-                }
-            }
-
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     Location location = locations[i][j];
                     List<Animal> animalsInLocation = location.getAnimals();
-                    if (animalsInLocation.size() > 1) { //Может ли животное съесть другого
+                    if (animalsInLocation.size() > 1 || ) { //Может ли животное съесть другого
                         for (int k = 0; k < animalsInLocation.size(); k++) {
                             Animal currentAnimal = animalsInLocation.get(k);
                             if (currentAnimal instanceof Bear) {
@@ -107,6 +98,19 @@ public class Island {
                     }
                 }
             }
+
+            // Проверка голода
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    List<Animal> animalsInLocation = Island.getLocations()[i][j].getAnimals();
+                    for (int k = 0; k < animalsInLocation.size(); k++) {
+                        animalsInLocation.get(k).checkHunger();
+                    }
+                }
+            }
+
+            System.out.println("------------------------");
+            Location.spawnPlant(1);
 
         }
         System.out.println("All animal are dead");
