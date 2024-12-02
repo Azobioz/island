@@ -1,7 +1,6 @@
 package animals.herbivores;
 
-import Land.Plant;
-import animals.Animal;
+
 
 public class Goat extends Herbivore {
 

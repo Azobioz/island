@@ -1,4 +1,4 @@
-import Land.Island;
+import land.Island;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -1,6 +1,6 @@
 package animals.predators;
 
-import Land.Island;
+
 import animals.Animal;
 import animals.herbivores.*;
 

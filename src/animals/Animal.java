@@ -3,9 +3,8 @@ package animals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
-
-import Land.Island;
-import Land.Location;
+import land.Island;
+import land.Location;
 
 
 public abstract class Animal {

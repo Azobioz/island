@@ -1,6 +1,6 @@
 package animals.predators;
 
-import Land.Island;
+import land.Island;
 import animals.Animal;
 
 import java.util.Random;

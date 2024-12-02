@@ -1,4 +1,4 @@
-package Land;
+package land;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package Land;
+package land;
 
 import animals.Animal;
 

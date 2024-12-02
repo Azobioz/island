@@ -1,7 +1,7 @@
 package animals.herbivores;
 
-import Land.Plant;
-import animals.Animal;
+
+
 
 public class Caterpillar extends Herbivore {
 

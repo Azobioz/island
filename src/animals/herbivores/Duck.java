@@ -1,8 +1,7 @@
 package animals.herbivores;
 
-import Land.Island;
-import Land.Plant;
-import animals.Animal;
+import land.Island;
+
 
 import java.util.Random;
 

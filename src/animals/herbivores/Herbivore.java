@@ -1,7 +1,7 @@
 package animals.herbivores;
 
-import Land.Island;
-import Land.Plant;
+import land.Island;
+import land.Plant;
 import animals.Animal;
 
 public class Herbivore extends Animal {
