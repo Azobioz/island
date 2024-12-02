@@ -25,12 +25,12 @@ public class Duck extends Herbivore {
 
                     System.out.println(this.getClass().getSimpleName() + " " + this.getId() + " ate "
                             + caterpillar.getClass().getSimpleName() + " in [" + this.getY() + ", " + this.getX() + "]");
+                    Island.setHowManyAnimals(Island.getHowManyAnimals() - 1);
                 }
                 else {
                     System.out.println(this.getClass().getSimpleName() + " " + this.getId() + " tried to eat "
                             + caterpillar.getClass().getSimpleName() + " ["  + changeToEatCaterpillar + "]");
                 }
-                Island.setHowManyAnimals(Island.getHowManyAnimals() - 1);
             this.setHunger(0);
             this.setMoved(true);
         }

@@ -37,7 +37,7 @@ public class Island {
                     Buffalo buffalo = new Buffalo(whereItWillBeX, whereItWillBeY);
                     locations[buffalo.getY()][buffalo.getX()].addAnimal(buffalo);
                 }
-                if (whatAnimal == 1) {
+                else if (whatAnimal == 1) {
                     Caterpillar caterpillar = new Caterpillar(whereItWillBeX, whereItWillBeY);
                     locations[caterpillar.getY()][caterpillar.getX()].addAnimal(caterpillar);
                 }
@@ -147,8 +147,7 @@ public class Island {
                                                 needToBreak = true;
                                                 break; //только одно размножение в одной локации за каждый ход
                                             }
-                                        } catch (NoSuchMethodException | IllegalAccessException |
-                                                 InstantiationException | InvocationTargetException e) {
+                                        } catch (Exception e) {
                                             throw new RuntimeException(e);
                                         }
                                     }
@@ -166,15 +165,6 @@ public class Island {
 
                     }
                 }
-                //Даем животным ходить
-                for (int i = 0; i < height; i++) {
-                    for (int j = 0; j < width; j++) {
-                        Location location = locations[i][j];
-                        for (Animal animal : location.getAnimals()) {
-                            animal.setMoved(false);
-                        }
-                    }
-                }
 
                 // Проверка голода
                 for (int i = 0; i < height; i++) {
@@ -185,6 +175,17 @@ public class Island {
                         }
                     }
                 }
+
+                //Даем животным ходить
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) {
+                        Location location = locations[i][j];
+                        for (Animal animal : location.getAnimals()) {
+                            animal.setMoved(false);
+                        }
+                    }
+                }
+
 
                 System.out.println("Status: animals left - " + Island.howManyAnimals);
                 System.out.println("----------------------");

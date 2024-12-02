@@ -3,8 +3,8 @@ import land.Island;
 import java.lang.reflect.InvocationTargetException;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-            Island island = new Island(2, 2, 3, 2);
+    public static void main(String[] args) {
+            Island island = new Island(3, 3, 100, 20);
 
     }
 }
