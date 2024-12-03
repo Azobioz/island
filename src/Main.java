@@ -1,10 +1,13 @@
 import land.Island;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
-            Island island = new Island(3, 3, 100, 20);
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        executor.execute(new Island(3, 3, 100, 20));
 
     }
 }

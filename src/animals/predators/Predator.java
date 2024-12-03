@@ -17,7 +17,6 @@ public abstract class Predator extends Animal {
 
     public abstract double getChanceToEat(Animal other);
 
-
     public boolean eat(Animal food) {
         Object[] eatableAnimals = canEatOnly();
         Random random = new Random();

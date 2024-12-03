@@ -8,14 +8,27 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Island {
+public class Island implements Runnable {
 
     private static Location[][] locations;
+    private int height;
+    private int width;
     private static int howManyAnimals;
+    private int howManyPlants;
+
 
 
     public Island(int height, int width, int howManyAnimals, int howManyPlants) {
+        this.height = height;
+        this.width = width;
+        Island.howManyAnimals = howManyAnimals;
+        this.howManyPlants = howManyPlants;
+    }
+
+    public void run () {
 
         while (howManyAnimals > 0) {
             locations = new Location[height][width]; //Добавление локаций и растений
