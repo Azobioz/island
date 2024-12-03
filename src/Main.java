@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 public class Main {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(5);
-        executor.execute(new Island(3, 3, 100, 20));
-
+        executor.execute(new Island(3, 3, 10, 20));
+        executor.shutdown();
     }
 }
