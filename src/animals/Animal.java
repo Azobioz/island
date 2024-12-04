@@ -29,7 +29,7 @@ public abstract class Animal {
 
     public abstract <T> T[] canEatOnly();
 
-    public void walk(Location[][] island) {
+    public boolean walk(Location[][] island) {
         if (!isMoved()) {
             Random random = new Random();
             int newMove = random.nextInt(4); // 0 - up, 1 - right, 2 - down, 3 - left
@@ -69,6 +69,7 @@ public abstract class Animal {
                         break;
 
                 }
+                return false;
             }
             else {
                 island[y][x].removeAnimal(this);
@@ -80,7 +81,9 @@ public abstract class Animal {
             isMoved = true;
             hunger++;
             rechargeToMultiplyAgain++;
+            return true;
         }
+        return false;
     }
 
 

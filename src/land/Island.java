@@ -223,6 +223,7 @@ public class Island implements Runnable {
         Island.howManyAnimals = howManyAnimals;
     }
 
-
-
+    public static void setLocations(Location[][] locations) {
+        Island.locations = locations;
+    }
 }
