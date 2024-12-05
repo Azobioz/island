@@ -1,5 +1,6 @@
 package test;
 
+import animals.predators.Bear;
 import animals.predators.Wolf;
 import land.Island;
 import land.Location;
@@ -37,6 +38,18 @@ public class AnimalMultiplyTest {
 
         boolean result = wolf1.multiply(wolf2, locations);
         Assert.assertTrue(result);
+
+        Wolf wolf3 = new Wolf();
+        wolf3.setX(1);
+        wolf3.setY(1);
+
+        Bear bear1 = new Bear();
+        bear1.setX(1);
+        bear1.setY(1);
+
+        boolean negativeResult = wolf3.multiply(bear1, locations);
+        Assert.assertFalse(negativeResult);
+
     }
 
 }

@@ -34,9 +34,22 @@ public class PredatorEatTest {
 
         locations[1][1].addAnimal(bear1);
         locations[1][1].addAnimal(deer1);
+        int i = 10;
+        int counter = 0;
+        while (i != 0) {
+            if( bear1.eat(deer1)) {
+                counter++;
+            }
 
-        boolean result = bear1.eat(deer1);
-        Assert.assertTrue(result);
+            i--;
+        }
+        Assert.assertTrue(counter > 0);
+
+        Bear bear2 = new Bear();
+        bear2.setY(1);
+        bear2.setX(1);
+        boolean negativeResult = bear1.eat(bear2);
+        Assert.assertFalse(negativeResult);
     }
 
 

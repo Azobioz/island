@@ -1,5 +1,7 @@
 package test;
 
+import animals.Animal;
+import animals.herbivores.Mouse;
 import animals.herbivores.Sheep;
 import land.Island;
 import land.Location;
@@ -35,6 +37,14 @@ public class HerbivorEatTest {
 
         boolean result = sheep1.eat(plant1);
         Assert.assertTrue(result);
+
+
+        Plant plant2 = new Plant();
+        locations[3][3].addPlant(plant2);
+        sheep1.setY(5);
+        sheep1.setX(4);
+        boolean negativeResult = sheep1.eat(plant2);
+        Assert.assertFalse(negativeResult);
     }
 
 }
